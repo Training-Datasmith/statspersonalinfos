@@ -49,11 +49,24 @@ class statspersonalinfos extends ModuleGraph
         $this->ps_versions_compliancy = ['min' => '1.7.1.0', 'max' => _PS_VERSION_];
     }
 
+    /**
+     * Install the module and register the stats dashboard hook.
+     *
+     * @return bool True on successful installation, false otherwise
+     */
     public function install()
     {
         return parent::install() && $this->registerHook('displayAdminStatsModules');
     }
 
+    /**
+     * Render anonymised customer demographic charts on the admin statistics dashboard.
+     *
+     * Presents gender distribution, age-range breakdown, and country distribution as pie charts.
+     * No personally identifiable information is included in the output.
+     *
+     * @return string HTML output for the statistics widget
+     */
     public function hookDisplayAdminStatsModules()
     {
         $this->html = '
