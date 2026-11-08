@@ -121,7 +121,7 @@ class statspersonalinfos extends ModuleGraph
 						<div class="col-lg-4">
 							<p>' . $this->trans('Gender distribution allows you to determine the percentage of men and women shoppers on your store.', [], 'Modules.Statspersonalinfos.Admin') . '</p>
 							<hr/>
-							<a class="btn btn-default export-csv" href="' . Tools::safeOutput($_SERVER['REQUEST_URI'] . '&export=1&exportType=gender') . '">
+							<a class="btn btn-default export-csv" href="' . Tools::safeOutput($_SERVER['REQUEST_URI']) . '&export=1&exportType=gender">
 								<i class="icon-cloud-upload"></i> ' . $this->trans('CSV Export', [], 'Modules.Statspersonalinfos.Admin') . '
 							</a>
 						</div>
@@ -138,7 +138,7 @@ class statspersonalinfos extends ModuleGraph
 						<div class="col-lg-4">
 							<p>' . $this->trans('Age ranges allow you to better understand target demographics.', [], 'Modules.Statspersonalinfos.Admin') . '</p>
 							<hr/>
-							<a class="btn btn-default export-csv" href="' . Tools::safeOutput($_SERVER['REQUEST_URI'] . '&export=1&exportType=age') . '">
+							<a class="btn btn-default export-csv" href="' . Tools::safeOutput($_SERVER['REQUEST_URI']) . '&export=1&exportType=age">
 								<i class="icon-cloud-upload"></i> ' . $this->trans('CSV Export', [], 'Modules.Statspersonalinfos.Admin') . '
 							</a>
 						</div>
@@ -155,7 +155,7 @@ class statspersonalinfos extends ModuleGraph
 						<div class="col-lg-4">
 							<p>' . $this->trans('Country distribution allows you to analyze which part of the World your customers are shopping from.', [], 'Modules.Statspersonalinfos.Admin') . '</p>
 							<hr/>
-							<a class="btn btn-default export-csv" href="' . Tools::safeOutput($_SERVER['REQUEST_URI'] . '&export=1&exportType=country') . '">
+							<a class="btn btn-default export-csv" href="' . Tools::safeOutput($_SERVER['REQUEST_URI']) . '&export=1&exportType=country">
 								<i class="icon-cloud-upload"></i> ' . $this->trans('CSV Export', [], 'Modules.Statspersonalinfos.Admin') . '
 							</a>
 						</div>
@@ -172,7 +172,7 @@ class statspersonalinfos extends ModuleGraph
 						<div class="col-lg-4">
 							<p>' . $this->trans('Currency range allows you to determine which currency your customers are using.', [], 'Modules.Statspersonalinfos.Admin') . '</p>
 							<hr/>
-							<a class="btn btn-default export-csv" href="' . Tools::safeOutput($_SERVER['REQUEST_URI'] . '&export=1&exportType=currency') . '">
+							<a class="btn btn-default export-csv" href="' . Tools::safeOutput($_SERVER['REQUEST_URI']) . '&export=1&exportType=currency">
 								<i class="icon-cloud-upload"></i> ' . $this->trans('CSV Export', [], 'Modules.Statspersonalinfos.Admin') . '
 							</a>
 						</div>
@@ -189,7 +189,7 @@ class statspersonalinfos extends ModuleGraph
 						<div class="col-lg-4">
 							<p>' . $this->trans('Language distribution allows you to analyze the browsing language used by your customers.', [], 'Modules.Statspersonalinfos.Admin') . '</p>
 							<hr/>
-							<a class="btn btn-default export-csv" href="' . Tools::safeOutput($_SERVER['REQUEST_URI'] . '&export=1&exportType=language') . '">
+							<a class="btn btn-default export-csv" href="' . Tools::safeOutput($_SERVER['REQUEST_URI']) . '&export=1&exportType=language">
 								<i class="icon-cloud-upload"></i> ' . $this->trans('CSV Export', [], 'Modules.Statspersonalinfos.Admin') . '
 							</a>
 						</div>
@@ -329,8 +329,8 @@ class statspersonalinfos extends ModuleGraph
                 // Total unknown
                 $sql = 'SELECT COUNT(`id_customer`) as total
 						FROM `' . _DB_PREFIX_ . 'customer`
-						WHERE `birthday` IS NULL
-							OR `birthday` = "0000-00-00"
+						WHERE (`birthday` IS NULL
+							OR `birthday` = "0000-00-00")
 							' . Shop::addSqlRestriction(Shop::SHARE_CUSTOMER);
                 $result = Db::getInstance((bool) _PS_USE_SQL_SLAVE_)->getRow($sql);
                 if (isset($result['total']) && $result['total']) {
